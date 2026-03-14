@@ -2,7 +2,7 @@
 
 ## About
 
-I'm **Stijn**, a software engineer focused on building production-grade tools and systems. I work across the full stack — from low-level Java networking to TypeScript frontends — with a strong interest in open source, performance engineering, and developer tooling.
+I'm **Stijn**, a software engineer focused on building production-grade tools and distributed systems. I work across the full stack — from low-level Java networking and event-driven backend architecture to TypeScript frontends and mobile applications — with a strong interest in open source, performance engineering, and developer tooling.
 
 Currently building at [@ordnary-com](https://github.com/ordnary-com).
 
@@ -10,17 +10,83 @@ Currently building at [@ordnary-com](https://github.com/ordnary-com).
 
 ## Featured Projects
 
-| Project | Description | Language |
-|--------|-------------|----------|
-| [**NetworkDataAPI**](https://github.com/7txr/NetworkDataAPI) | Production-grade, MongoDB-backed data synchronization solution designed for large-scale distributed networks | Java |
-| [**cloud-controller**](https://github.com/7txr/cloud-controller) | Automated server lifecycle management using RabbitMQ, Redis, and the Pterodactyl API for containerized infrastructure | Python |
-| [**ServerSync**](https://github.com/7txr/ServerSync) | Cross-server data synchronization layer for distributed network architectures | Java |
-| [**BWProxy2023**](https://github.com/7txr/BWProxy2023-1.21) | High-performance proxy implementation with modern protocol support | Java |
-| [**TheOrbit**](https://github.com/7txr/TheOrbit) | Feature-rich PvP gamemode with a full quest system, leveling, mystic items, and dynamic events | Java |
-| [**front-end.weblance**](https://github.com/7txr/front-end.weblance) | Frontend web application for the Weblance platform, built with Next.js and SCSS | JavaScript |
-| [**com.ordnary.accounts**](https://github.com/7txr/com.ordnary.accounts) | Account management service for the Ordnary platform | Java |
-| [**com.ordnary.developers**](https://github.com/7txr/com.ordnary.developers) | Developer portal and tooling for the Ordnary ecosystem | Java |
-| [**YEETIFF**](https://github.com/7txr/YEETIFF) | Yet Even Extremely Expressier Transcoded Image File Format | Python |
+### 🔗 [NetworkDataAPI](https://github.com/7txr/NetworkDataAPI)
+> **Enterprise-grade shared MongoDB connection layer for distributed server networks** · `Java` · `MongoDB` · `Caffeine` · `REST`
+
+A production-ready data synchronization solution architected for high-concurrency server networks. Instead of each plugin managing its own database connections — causing connection storms at scale — NetworkDataAPI exposes a **shared MongoDB connection pool** consumed by all plugins simultaneously, reducing total connections by 80%+ on a typical 5-server network.
+
+**Architecture highlights:**
+- Multi-module Maven project with isolated `core`, `paper`, `bungee`, and `example-plugin` modules — the core is platform-agnostic, platform modules provide thin adapter layers
+- **Caffeine-backed in-memory cache** with configurable TTL and max-size, achieving 85–95% cache hit rates in production workloads
+- Fully async API built on `CompletableFuture` thread pools (`core-pool-size` / `max-pool-size` configurable) — zero blocking on the main server thread
+- Optional **REST API** (Spark Java) exposing `/api/player/{uuid}` CRUD endpoints, secured via `X-API-Key` header, for external service integrations
+- CodeQL, Maven CI, and build/release pipelines via **GitHub Actions**
+- Benchmarks: `<5ms` for cached reads, `<50ms` for live MongoDB queries, supports `1000+` concurrent operations
+
+---
+
+### ☁️ [cloud-controller](https://github.com/7txr/cloud-controller)
+> **Event-driven infrastructure automation for containerized game server orchestration** · `Python` · `RabbitMQ` · `Redis` · `Pterodactyl API` · `Docker`
+
+An automated lifecycle management system for dynamically scaling containerized server instances across Pterodactyl nodes. The controller subscribes to AMQP queues via `pika`, evaluates per-game-mode capacity policies every 30 seconds, and provisions or deprovisions Docker containers through the Pterodactyl REST API — without any manual intervention.
+
+**Architecture highlights:**
+- **Event-driven concurrency model**: main thread runs the capacity evaluation loop while a dedicated consumer thread processes RabbitMQ messages, communicating via `threading.Queue` — no shared mutable state, no locks
+- **Redis as single source of truth**: all server state stored as persistent hash maps at `minecraft:servers:{type}:{id}`, enabling stateless controller restarts with zero data loss
+- Per-game-mode capacity policies: configurable `min_servers`, `max_servers`, `empty_buffer_count`, `spawn_threshold_percent`, and `despawn_empty_after` — scaling algorithm runs in `<100ms` per evaluation cycle across 10 game modes
+- Pterodactyl API integration for Docker container provisioning with `~40–90s` total time-to-accepting-connections per new instance
+- RabbitMQ queues are durable, messages published with `delivery_mode=2` (persistent) and manual ACK — no message loss on broker restart
+
+---
+
+### 🔄 [ServerSync](https://github.com/7txr/ServerSync)
+> **High-performance BungeeCord plugin for dynamic server orchestration across distributed proxy infrastructure** · `Java` · `BungeeCord` · `Redis` · `RabbitMQ` · `Pterodactyl API`
+
+A proxy-side orchestration plugin that handles real-time server registration, health monitoring, and intelligent player routing across multi-proxy Minecraft networks. Designed to work in tandem with `cloud-controller` — when cloud-controller provisions a new container, ServerSync automatically registers it to the network and begins routing players.
+
+**Architecture highlights:**
+- Supports **horizontal proxy scaling**: each proxy instance holds a unique `proxy.id`, and player counts are synchronized across all nodes via Redis keys at `minecraft:proxy:{id}:players`
+- **Three load balancing strategies**: `LEAST_PLAYERS` (minimize load), `RANDOM` (low overhead), `ROUND_ROBIN` (sequential distribution) — switchable via config with no code changes
+- Health check task runs on a configurable interval (default 10s), pinging all registered servers and cross-referencing against Redis state to automatically remove stale or offline nodes
+- Full **RabbitMQ event schema**: listens on `server_ready`, `server_empty`, and `player_count` queues; publishes `spawn_request` when all servers are full and `auto-spawn-on-full` is enabled
+- Discord webhook integration for real-time operational visibility: server registration/removal, errors, and startup events
+- Redis connection pool tuned for concurrency: `maxTotal`, `maxIdle`, `minIdle` configurable per network size
+
+---
+
+### 🌐 [front-end.weblance](https://github.com/7txr/front-end.weblance)
+> **Next.js frontend for the Weblance platform** · `JavaScript` · `Next.js` · `React` · `SCSS` · `HTML`
+
+The production frontend web application for Weblance, built on the Next.js App Router with a component-driven architecture. Implements `next/font` for automatic font optimization, context-based state management, and a clean separation between page routing (`/app`), reusable UI components (`/components`), and utility functions (`/utils`).
+
+**Stack:** Next.js App Router · SCSS modules (44.9% of codebase) · JavaScript · Static export via `next export` · Yarn workspaces
+
+---
+
+### 🎮 [TheOrbit](https://github.com/7txr/TheOrbit)
+> **Full-featured PvP gamemode recreation with combat systems, progression, and dynamic events** · `Java` · `Spigot API` · `Maven`
+
+A complete recreation of Hypixel's "The Pit" gamemode as a Spigot plugin. Features a 17+ ability combat system with configurable trigger types (on-hit, right-click, sneak+click, automatic), a tiered mystic item framework (Common → Rare → Epic → Legendary), an XP/prestige leveling system, dynamic event scheduling (Dragon, Warden), and a player-to-player auction house — all backed by a custom data persistence layer.
+
+**Technical highlights:**
+- Multi-file configuration architecture: `config.yml` for gameplay tuning (XP rates, coin multipliers, event timers), `mystics.yml` for declarative item/ability definitions — no code changes needed to add new mystics
+- Citizens NPC integration for shop vendors and quest givers; FancyHolograms for leaderboard and stat displays
+- PlaceholderAPI support and TAB integration for custom scoreboard/tablist rendering
+- Configurable cooldown system per ability with millisecond precision
+
+---
+
+### 📦 [com.ordnary.accounts](https://github.com/7txr/com.ordnary.accounts) · [com.ordnary.developers](https://github.com/7txr/com.ordnary.developers)
+> **Core platform services for the Ordnary ecosystem** · `Java` · `@ordnary-com`
+
+Backend services powering the Ordnary platform: `com.ordnary.accounts` handles authentication, identity management, and account lifecycle; `com.ordnary.developers` provides the developer portal, API key management, and tooling for third-party integrations within the Ordnary ecosystem.
+
+---
+
+### 🖼️ [YEETIFF](https://github.com/7txr/YEETIFF)
+> **Custom image container format with transcoding pipeline** · `Python`
+
+An experimental image file format specification and transcoding toolchain — *Yet Even Extremely Expressier Transcoded Image File Format*. Built to explore custom binary encoding, metadata schemas, and image pipeline design at a low level.
 
 ---
 
