@@ -61,7 +61,7 @@ The production frontend web application for Weblance, built on the Next.js App R
 
 ---
 
-### 🎮 [TheOrbit](https://github.com/7txr/TheOrbit)
+### 🎮 [TheOrbit](https://github.com/jakobsstijn/TheOrbit)
 > **Full-featured PvP gamemode recreation with combat systems, progression, and dynamic events** · `Java` · `Spigot API` · `Maven`
 
 A complete recreation of Hypixel's "The Pit" gamemode as a Spigot plugin. Features a 17+ ability combat system with configurable trigger types (on-hit, right-click, sneak+click, automatic), a tiered mystic item framework (Common → Rare → Epic → Legendary), an XP/prestige leveling system, dynamic event scheduling (Dragon, Warden), and a player-to-player auction house — all backed by a custom data persistence layer.
