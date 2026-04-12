@@ -37,40 +37,12 @@ An automated lifecycle management system for dynamically scaling containerized s
 
 ---
 
-### 🔄 [ServerSync](https://github.com/7txr/ServerSync)
-> **High-performance BungeeCord plugin for dynamic server orchestration across distributed proxy infrastructure** · `Java` · `BungeeCord` · `Redis` · `RabbitMQ` · `Pterodactyl API`
-
-A proxy-side orchestration plugin that handles real-time server registration, health monitoring, and intelligent player routing across multi-proxy Minecraft networks. Designed to work in tandem with `cloud-controller` — when cloud-controller provisions a new container, ServerSync automatically registers it to the network and begins routing players.
-
-**Architecture highlights:**
-- Supports **horizontal proxy scaling**: each proxy instance holds a unique `proxy.id`, and player counts are synchronized across all nodes via Redis keys at `minecraft:proxy:{id}:players`
-- **Three load balancing strategies**: `LEAST_PLAYERS` (minimize load), `RANDOM` (low overhead), `ROUND_ROBIN` (sequential distribution) — switchable via config with no code changes
-- Health check task runs on a configurable interval (default 10s), pinging all registered servers and cross-referencing against Redis state to automatically remove stale or offline nodes
-- Full **RabbitMQ event schema**: listens on `server_ready`, `server_empty`, and `player_count` queues; publishes `spawn_request` when all servers are full and `auto-spawn-on-full` is enabled
-- Discord webhook integration for real-time operational visibility: server registration/removal, errors, and startup events
-- Redis connection pool tuned for concurrency: `maxTotal`, `maxIdle`, `minIdle` configurable per network size
-
----
-
 ### 🌐 [front-end.weblance](https://github.com/7txr/front-end.weblance)
 > **Next.js frontend for the Weblance platform** · `JavaScript` · `Next.js` · `React` · `SCSS` · `HTML`
 
 The production frontend web application for Weblance, built on the Next.js App Router with a component-driven architecture. Implements `next/font` for automatic font optimization, context-based state management, and a clean separation between page routing (`/app`), reusable UI components (`/components`), and utility functions (`/utils`).
 
 **Stack:** Next.js App Router · SCSS modules (44.9% of codebase) · JavaScript · Static export via `next export` · Yarn workspaces
-
----
-
-### 🎮 [TheOrbit](https://github.com/jakobsstijn/TheOrbit)
-> **Full-featured PvP gamemode recreation with combat systems, progression, and dynamic events** · `Java` · `Spigot API` · `Maven`
-
-A complete recreation of Hypixel's "The Pit" gamemode as a Spigot plugin. Features a 17+ ability combat system with configurable trigger types (on-hit, right-click, sneak+click, automatic), a tiered mystic item framework (Common → Rare → Epic → Legendary), an XP/prestige leveling system, dynamic event scheduling (Dragon, Warden), and a player-to-player auction house — all backed by a custom data persistence layer.
-
-**Technical highlights:**
-- Multi-file configuration architecture: `config.yml` for gameplay tuning (XP rates, coin multipliers, event timers), `mystics.yml` for declarative item/ability definitions — no code changes needed to add new mystics
-- Citizens NPC integration for shop vendors and quest givers; FancyHolograms for leaderboard and stat displays
-- PlaceholderAPI support and TAB integration for custom scoreboard/tablist rendering
-- Configurable cooldown system per ability with millisecond precision
 
 ---
 
