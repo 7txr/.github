@@ -1,6 +1,6 @@
 <div align="center">
 
-# Stijn Jakobs
+# Hi, I am Stijn
 
 **Software Engineer** — distributed systems, developer tooling, full-stack platforms.
 
