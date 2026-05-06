@@ -1,8 +1,23 @@
+<div align="center">
+
+# Stijn Jakobs
+
+**Software Engineer** — distributed systems, developer tooling, full-stack platforms.
+
+[![Website](https://img.shields.io/badge/website-ordnary.com-0a0a0a?style=flat-square&logo=vercel&logoColor=white)](https://ordnary.com)
+[![Org](https://img.shields.io/badge/building_at-@ordnary--com-1f6feb?style=flat-square&logo=github&logoColor=white)](https://github.com/ordnary-com)
+[![Profile Views](https://komarev.com/ghpvc/?username=7txr&style=flat-square&color=blue&label=profile+views)](https://github.com/7txr)
+[![Followers](https://img.shields.io/github/followers/7txr?style=flat-square&label=followers&color=blue)](https://github.com/7txr?tab=followers)
+
+</div>
+
+---
+
 ## About
 
-I'm **Stijn**, a software engineer focused on building production-grade tools and distributed systems. I work across the full stack — from low-level Java networking and event-driven backend architecture to TypeScript frontends and mobile applications — with a strong interest in open source, performance engineering, and developer tooling.
+I build production-grade tools and distributed systems across the stack — from low-level Java networking and event-driven backend architecture to TypeScript frontends and mobile applications. Strong interest in open source, performance engineering, and developer tooling.
 
-Currently building at [@ordnary-com](https://github.com/ordnary-com).
+Currently building at [**@ordnary-com**](https://github.com/ordnary-com).
 
 ---
 
@@ -100,11 +115,22 @@ An experimental image file format specification and transcoding toolchain — *Y
 
 <div align="center">
 
-![GitHub Stats](https://github-readme-stats.vercel.app/api?username=7txr&theme=transparent&hide_border=false&include_all_commits=false&count_private=false)
+<a href="https://github.com/7txr">
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=7txr&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&title_color=1f6feb&icon_color=1f6feb&text_color=c9d1d9&bg_color=0d1117" alt="GitHub Stats" />
+  <img height="165" src="https://github-readme-streak-stats.herokuapp.com/?user=7txr&hide_border=true&background=0d1117&stroke=1f6feb&ring=1f6feb&fire=ff6b35&currStreakLabel=1f6feb&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e" alt="GitHub Streak" />
+</a>
 
-![GitHub Streak](https://nirzak-streak-stats.vercel.app/?user=7txr&theme=transparent&hide_border=false)
+<br/>
 
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=7txr&theme=transparent&hide_border=false&include_all_commits=false&count_private=false&layout=compact)
+<img width="55%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=7txr&layout=compact&hide_border=true&langs_count=10&title_color=1f6feb&text_color=c9d1d9&bg_color=0d1117" alt="Top Languages" />
+
+<br/><br/>
+
+<img width="95%" src="https://github-readme-activity-graph.vercel.app/graph?username=7txr&bg_color=0d1117&color=c9d1d9&line=1f6feb&point=ff6b35&area=true&hide_border=true" alt="Activity Graph" />
+
+<br/>
+
+<img width="95%" src="https://github-profile-trophy.vercel.app/?username=7txr&theme=onedark&no-frame=true&no-bg=true&margin-w=8&column=7" alt="GitHub Trophies" />
 
 </div>
 
@@ -112,17 +138,16 @@ An experimental image file format specification and transcoding toolchain — *Y
 
 ## Get Involved
 
-Open source thrives on collaboration. If you'd like to contribute, explore issues in any of my repositories — feedback, bug reports, and pull requests are always welcome.
+Open source thrives on collaboration. Feedback, bug reports, and pull requests are always welcome.
 
 - 📂 [Browse my repositories](https://github.com/7txr?tab=repositories)
 - ⭐ [See what I'm starring](https://github.com/7txr?tab=stars)
 - 🏢 [Check out Ordnary](https://github.com/ordnary-com)
-- 🐛 Use [repository issues](https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue) to report bugs or request features
 
 ---
 
 <div align="center">
 
-[![Profile Views](https://visitcount.itsvg.in/api?id=7txr&icon=0&color=0)](https://visitcount.itsvg.in)
+<sub>Built with care · <a href="https://github.com/7txr">@7txr</a></sub>
 
 </div>
