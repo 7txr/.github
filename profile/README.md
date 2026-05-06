@@ -38,36 +38,6 @@ A production-ready data synchronization solution architected for high-concurrenc
 
 ---
 
-### ☁️ [cloud-controller](https://github.com/7txr/cloud-controller)
-> **Event-driven infrastructure automation for containerized game server orchestration** · `Python` · `RabbitMQ` · `Redis` · `Pterodactyl API` · `Docker`
-
-An automated lifecycle management system for dynamically scaling containerized server instances across Pterodactyl nodes. The controller subscribes to AMQP queues via `pika`, evaluates per-game-mode capacity policies every 30 seconds, and provisions or deprovisions Docker containers through the Pterodactyl REST API — without any manual intervention.
-
-**Architecture highlights:**
-- **Event-driven concurrency model**: main thread runs the capacity evaluation loop while a dedicated consumer thread processes RabbitMQ messages, communicating via `threading.Queue` — no shared mutable state, no locks
-- **Redis as single source of truth**: all server state stored as persistent hash maps at `minecraft:servers:{type}:{id}`, enabling stateless controller restarts with zero data loss
-- Per-game-mode capacity policies: configurable `min_servers`, `max_servers`, `empty_buffer_count`, `spawn_threshold_percent`, and `despawn_empty_after` — scaling algorithm runs in `<100ms` per evaluation cycle across 10 game modes
-- Pterodactyl API integration for Docker container provisioning with `~40–90s` total time-to-accepting-connections per new instance
-- RabbitMQ queues are durable, messages published with `delivery_mode=2` (persistent) and manual ACK — no message loss on broker restart
-
----
-
-### 🌐 [front-end.weblance](https://github.com/7txr/front-end.weblance)
-> **Next.js frontend for the Weblance platform** · `JavaScript` · `Next.js` · `React` · `SCSS` · `HTML`
-
-The production frontend web application for Weblance, built on the Next.js App Router with a component-driven architecture. Implements `next/font` for automatic font optimization, context-based state management, and a clean separation between page routing (`/app`), reusable UI components (`/components`), and utility functions (`/utils`).
-
-**Stack:** Next.js App Router · SCSS modules (44.9% of codebase) · JavaScript · Static export via `next export` · Yarn workspaces
-
----
-
-### 📦 [com.ordnary.accounts](https://github.com/7txr/com.ordnary.accounts) · [com.ordnary.developers](https://github.com/7txr/com.ordnary.developers)
-> **Core platform services for the Ordnary ecosystem** · `Laravel`, `Vite`, `TailwindCSS`, `Blade` · `@ordnary-com`
-
-Backend services powering the Ordnary platform: `com.ordnary.accounts` handles authentication, identity management, and account lifecycle; `com.ordnary.developers` provides the developer portal, API key management, and tooling for third-party integrations within the Ordnary ecosystem.
-
----
-
 ### 🖼️ [YEETIFF](https://github.com/7txr/YEETIFF)
 > **Custom image container format with transcoding pipeline** · `Python`, `Rust`
 
@@ -116,13 +86,13 @@ An experimental image file format specification and transcoding toolchain — *Y
 <div align="center">
 
 <a href="https://github.com/7txr">
-  <img height="165" src="https://github-readme-stats.vercel.app/api?username=7txr&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&title_color=1f6feb&icon_color=1f6feb&text_color=c9d1d9&bg_color=0d1117" alt="GitHub Stats" />
-  <img height="165" src="https://github-readme-streak-stats.herokuapp.com/?user=7txr&hide_border=true&background=0d1117&stroke=1f6feb&ring=1f6feb&fire=ff6b35&currStreakLabel=1f6feb&sideLabels=c9d1d9&currStreakNum=c9d1d9&sideNums=c9d1d9&dates=8b949e" alt="GitHub Streak" />
+  <img height="165" src="https://github-readme-stats.vercel.app/api?username=7txr&show_icons=true&include_all_commits=true&count_private=true&hide_border=true&theme=tokyonight" alt="GitHub Stats" />
+  <img height="165" src="https://streak-stats.demolab.com?user=7txr&hide_border=true&theme=tokyonight" alt="GitHub Streak" />
 </a>
 
 <br/>
 
-<img width="55%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=7txr&layout=compact&hide_border=true&langs_count=10&title_color=1f6feb&text_color=c9d1d9&bg_color=0d1117" alt="Top Languages" />
+<img width="55%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=7txr&layout=compact&hide_border=true&langs_count=10&theme=tokyonight" alt="Top Languages" />
 
 <br/><br/>
 
